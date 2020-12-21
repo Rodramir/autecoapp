@@ -1,0 +1,272 @@
+<mvc:View xmlns:smarttable="sap.ui.comp.smarttable" xmlns:simple="sap.gantt.simple"   xmlns:layout="sap.ui.layout" 
+            xmlns:core="sap.ui.core" 
+            xmlns:mvc="sap.ui.core.mvc" 
+            xmlns:f="sap.ui.layout.form"
+            displayBlock="true" 
+            xmlns="sap.m"
+            controllerName="ns.appPedidos.controller.home" 
+    >
+
+    <Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" busy="{homeView>/busy}" busyIndicatorDelay="{homeView>/delay}" title="{i18n>Portal de Distribuidores}">
+
+					<content>
+                        <f:SimpleForm 
+                            id="SimpleForm1"
+                            maxContainerCols="2" 
+                            title="> Nuevo Pedido"
+                            layout="ResponsiveGridLayout"
+                            labelSpanL="2" labelSpanM="2" 
+                            emptySpanL="0" emptySpanM="0"
+                            columnsL="2" columnsM="2" 
+                            class="editableForm" >
+
+                            <Wizard visible="{viewInitialModel>/visibleWizard}"
+                                    id="SOStatusWizard" 
+                                    finishButtonText="Finish" 
+                                    showNextButton="true"
+                                    >
+
+                                     <WizardStep id="WS_TipoVenta" visible="true" title="Tipo de Venta"
+	                                      activate="wizardCompletedHandler">
+                                        <VBox class="sapUiTinyMargin">
+
+                                        <f:SimpleForm   id="TipoVenta" editable="true" 
+                                                        layout="ResponsiveGridLayout"  
+
+                                                        labelSpanXL="2" labelSpanL="2" 
+                                                        labelSpanM="2"  labelSpanS="2"
+
+                                                        adjustLabelSpan="false" 
+                                                        
+                                                        emptySpanXL="0" emptySpanL="0" 
+                                                        emptySpanM="0"  emptySpanS="0"
+
+                                                        columnsXL="1" columnsL="1" columnsM="1" 
+                                                        singleContainerFullSize="true">
+                                            <f:content>
+
+                                            <!-- TIPO DE VENTA -->
+                                            <FormattedText htmlText='&lt;p style="font-size:16px; color:#FF8E00; padding-right:40px; margin-bottom:0px; "&gt; Seleccione el tipo de venta &lt;/p&gt;'/>
+                                            
+                                            <RadioButtonGroup   columns="2" width="100%" 
+                                                                select="onRadioSelect">
+                                                <buttons>
+                                                    <RadioButton id="rbMovilidadId" text="Movilidad" ></RadioButton>
+                                                    <RadioButton id="rbRepuestosId" text="Repuestos y Accesorios"></RadioButton>
+                                                </buttons>
+                                            </RadioButtonGroup>
+                                            
+                                            <core:Title text="" />  
+
+                                            <Table  id="idClientesTable" 
+                                                    items="{clientes>/results}" 
+                                                    mode="SingleSelectMaster" 
+                                                    selectionChange="onClientSelect"  
+                                                  > 
+                                                <headerToolbar>
+                                                    <Toolbar>
+                                                        <Title  id="tableHeader" text="Clientes"/>
+                                                        <ToolbarSpacer/>
+                                                        <SearchField id="searchField" width="50%" search="onSearchClientes" tooltip="{i18n>worklistSearchTooltip}"> </SearchField>  
+                                                    </Toolbar>
+                                                </headerToolbar>
+     
+                                                    <columns >
+                                                        <Column width="25%">
+                                                            <Text id ="nomClienteTitle" />
+                                                            <FormattedText htmlText='&lt;p style="font-size:16px; color:#FF8E00; padding-right:40px; margin-bottom:0px; "&gt; Cliente &lt;/p&gt;'/>
+
+                                                        </Column>          
+                                                        <Column >
+                                                            <Text id ="sapCode" text="Cod. SAP" />
+                                                            <FormattedText htmlText='&lt;p style="font-size:14px; color:#FF8E00; padding-right:40px; margin-bottom:0px; "&gt; Cod. SAP &lt;/p&gt;'/>
+                                                        </Column>          
+                                                        <Column>
+                                                            <Text id ="nit" text="NIT" />
+                                                            <FormattedText htmlText='&lt;p style="font-size:14px; color:#FF8E00; padding-right:40px; margin-bottom:0px; "&gt; NIT &lt;/p&gt;'/>                                                            
+                                                        </Column>   
+                                                        <Column>
+                                                            <Text id ="city" text="Ciudad" />
+                                                            <FormattedText htmlText='&lt;p style="font-size:14px; color:#FF8E00; padding-right:40px; margin-bottom:0px; "&gt; Ciudad &lt;/p&gt;'/>                                                            
+                                                        </Column>   
+                                                        <Column width="30%">
+                                                            <Text id ="direccion" text="Dirección" />
+                                                            <FormattedText htmlText='&lt;p style="font-size:14px; color:#FF8E00; padding-right:40px; margin-bottom:0px; "&gt; Dirección &lt;/p&gt;'/>                                                            
+                                                        </Column>   
+                                                        <Column>
+                                                            <Text id ="telefono" text="Teléfono" />
+                                                            <FormattedText htmlText='&lt;p style="font-size:14px; color:#FF8E00; padding-right:40px; margin-bottom:0px; "&gt; Teléfono &lt;/p&gt;'/>
+                                                        </Column>   
+                                                    </columns>
+
+
+                                                    <items>
+                                                        <ColumnListItem>
+                                                            <cells>
+                                                                <Text
+                                                                    text="{clientes>NAME1}"/>
+                                                                <Text
+                                                                    text="{clientes>KUNNR}"/>
+                                                                <Text
+                                                                    text="{clientes>STCEG}"/>
+                                                                <Text
+                                                                    text="{clientes>CITY1}"/>
+                                                                <Text
+                                                                    text="{clientes>DIREC}"/>
+                                                                <Text
+                                                                    text="{clientes>TELF1}"/>                                                                                                                                                                                                                                                                                                                                                    
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </f:content>
+                                        </f:SimpleForm>
+			                            </VBox>
+                                     </WizardStep>
+
+                                     <WizardStep id="WS_DatosGrles" visible="true" title="Datos Generales"
+	                                      activate="wizardCompletedHandler">
+                                     
+                                        <VBox class="sapUiTinyMargin">
+                                        <f:SimpleForm   id="DatosGrles" editable="false" layout="ResponsiveGridLayout" 
+                                                        
+                                                        labelSpanXL="2" labelSpanL="2" 
+                                                        labelSpanM="2"  labelSpanS="2 " 
+                                                        adjustLabelSpan="true" 
+                                                        emptySpanXL="0" emptySpanL="0" 
+                                                        emptySpanM="0" emptySpanS="0" 
+                                                        
+                                                        columnsXL="1" columnsL="1" columnsM="1" 
+                                                        singleContainerFullSize="false">
+                                     
+                                        <f:content>
+
+                                        <HBox justifyContent="SpaceBetween" class="HBoxStyle">
+
+                                            <VBox class="leftVBoxStyle">
+                                                <Label text="Vendedor" />
+                                                <ComboBox xmlns="sap.m" id="box1"
+                                                    class="sapUiSmallMarginBottom"
+                                                    valueState="Warning" >
+                                                    <items>
+                                                        <core:Item xmlns:core="sap.ui.core" text="Roberto Carlos Sisqueiros" 
+                                                            key="Item 1 Text"  id="item0"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="Juan Mendoza Guerra" 
+                                                            key="Item 2 Text" id="item1"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="Luis Aguirre Leal" 
+                                                            key="Item 3 Text" id="item2"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="Daniela Fuentes Gutierrez" 
+                                                            key="Item 4 Text" id="item3"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="Juan Mendoza Guerra" 
+                                                            key="Item 5 Text" id="item4"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="Edgar Alfonso Uribe Peralta" 
+                                                            key="Item 6 Text" id="item5"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="Diego Alfonso Luna Luna" 
+                                                            key="Item 7 Text" id="item6"/>
+                                                    </items>
+                                                </ComboBox>
+                                             </VBox>
+                                             
+                                            <!--Se agrega para que ocupe el campo de la matriz de la vista-->
+                                            <!-- <core:Title text="" /> -->
+
+                                            <!--combo box-
+                                            <core:Title text="Condicion de Pago" /> -->
+                                             <VBox>
+                                                <Label labelFor="box2" text="Condicion de Pago"/>
+                                                <ComboBox xmlns="sap.m" id="box2"
+                                                    valueState="Warning">
+                                                    <items>
+                                                        <core:Item xmlns:core="sap.ui.core" text="CONTADO 30 DES 1% 10 DIA CKD" 
+                                                            key="Item 1 Text1"  id="itemc0"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="CONTADO 30 DES 1% 10 DIA CBU" 
+                                                            key="Item 2 Text1" id="itemc1"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="CONTADO 30 DES 1% 10 DIA REP" 
+                                                            key="Item 2 Text1" id="itemc2"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="ANTICIPADO RTOS Y MOTOS" 
+                                                            key="Item 2 Text1" id="itemc4"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="10 DIAS NETO" 
+                                                                key="Item 2 Text1" id="itemc5"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="30 DIAS NETO 1% 10 DIAS" 
+                                                            key="Item 2 Text1" id="itemc6"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="45 DIAS NETO 1% 10 DIAS" 
+                                                            key="Item 2 Text1" id="itemc7"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="60 DIAS NETO 2% 10 DÍAS -1% 30" 
+                                                            key="Item 2 Text1" id="itemc8"/>
+                                                        <core:Item xmlns:core="sap.ui.core" text="90 DIAS NETO 1% 10 DIAS" 
+                                                            key="Item 2 Text1" id="itemc9"/>
+                                                    </items>
+                                                </ComboBox>
+                                            </VBox>
+                                            <!--combo box
+                                            <core:Title text="Clase de Pedido"/> -->
+                                            <VBox>
+                                                <Label labelFor="box3" text="Clase de Pedido"/>
+                                                <ComboBox xmlns="sap.m" id="box3"
+                                                    valueState="Warning"
+                                                    cols="10" >
+                                                    <items>
+                                                    <core:Item xmlns:core="sap.ui.core" text="ZPNO - Pedido Normal" 
+                                                        key="Item 1 Text1"  id="itemcp0"/>
+                                                    <core:Item xmlns:core="sap.ui.core" text="ZPEM - Pedido Emergencia" 
+                                                        key="Item 2 Text1" id="itemcp1"/>
+                                                    <core:Item xmlns:core="sap.ui.core" text="ZPMFR - Pedido MFR" 
+                                                        key="Item 2 Text1" id="itemcp2"/>
+                                                    <core:Item xmlns:core="sap.ui.core" text="ZPAG - Pedido Alta Gama" 
+                                                        key="Item 2 Text1" id="itemcp3"/>
+                                                    </items>
+                                                </ComboBox>
+                                            </VBox>
+
+                                            <VBox>
+                                                <Label labelFor="PO" text="Orden de Compra"/>
+                                                <TextArea id="PO" 
+                                                valueState="Warning"
+                                                class="sapUiSmallMarginBottom"
+                                                width="100%" rows="1" cols="30" maxLength="35"/>                                                   
+
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Texto Observaciones -->                                            
+                                        <Label labelFor="Observaciones" text="Observaciones"/>
+                                        <TextArea id="Observaciones" 
+                                        valueState="Warning"
+                                        width="100%" rows="2" cols="20" maxLength="500"/>
+
+                                        </f:content>
+                                        </f:SimpleForm>
+			                            </VBox>
+
+                                     </WizardStep>
+
+                                     <WizardStep id="Pedido" visible="true" title="Pedido"
+	                                      activate="wizardCompletedHandler">
+                                     </WizardStep>
+                                     
+                                     <WizardStep id="DetPedido" visible="true" title="Detalle del Pedido"
+	                                      activate="wizardCompletedHandler">
+                                     </WizardStep>
+
+                            </Wizard>
+                        <!--</content>-->
+                        
+                        </f:SimpleForm> 
+                    </content>
+                    <footer>
+                        <Toolbar >
+                            <content>
+                                <Button text="Cancelar" type="Reject" press="handleCancelPressOnNewSO" ></Button>
+                                <Button text="Guardar"  type="Accept" press="handleSavePressOnNewSO" ></Button>
+                                <Button text="Enviar"   type="Accept" press="handleSavePressOnNewSO" ></Button>
+                            </content>
+                        </Toolbar>
+                    </footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
