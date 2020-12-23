@@ -34,7 +34,7 @@ sap.ui.define([
                         filters: [
                             new Filter("NAME1", FilterOperator.Contains, sQuery),
                             new Filter("KUNNR", FilterOperator.Contains, sQuery),
-                            new Filter("STCEG", FilterOperator.Contains, sQuery)
+                            new Filter("SORTL", FilterOperator.Contains, sQuery)
                         ],
                         and: false
                     })
@@ -80,18 +80,15 @@ sap.ui.define([
                     this.getView().getModel('homeView').setProperty('/busy', false)
                 }.bind(this))
 
-
             },
 
             onInit: function () {
+
                 var busyModel = new JSONModel({
                     busy: true,
                     delay: 0
                 })
                 this.getView().setModel(busyModel, 'homeView')
-
-
-
 
                 var oModelRb = new JSONModel({
                     rbParam: "1000"
@@ -133,7 +130,5 @@ sap.ui.define([
                 // fin destinatarios	                
 
             }
-        }
-        );
-    }
-);
+        });
+    });

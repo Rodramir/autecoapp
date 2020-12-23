@@ -10,8 +10,7 @@
     <Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" busy="{homeView>/busy}" busyIndicatorDelay="{homeView>/delay}" 
-                title="{i18n>Portal de Distribuidores}">
+				<Page id="page" busy="{homeView>/busy}" busyIndicatorDelay="{homeView>/delay}" title="{i18n>Portal de Distribuidores}">
 					<content>
 
                         <f:SimpleForm 
@@ -112,15 +111,13 @@
                                                                 <Text
                                                                     text="{clientes>KUNNR}"/>
                                                                 <Text
-                                                                    text="{clientes>SORTL}"/>
+                                                                    text="{clientes>STCEG}"/>
                                                                 <Text
                                                                     text="{clientes>CITY1}"/>
                                                                 <Text
                                                                     text="{clientes>DIREC}"/>
                                                                 <Text
-                                                                    text="{clientes>TELF1}"/>
-
-
+                                                                    text="{clientes>TELF1}"/>                                                                                                                                                                                                                                                                                                                                                    
                                                             </cells>
                                                         </ColumnListItem>
                                                     </items>
